@@ -23,7 +23,21 @@ namespace HighResolutionCamera
             filterInfoCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             foreach (FilterInfo filterInfo in filterInfoCollection)
                 cboCamera.Items.Add(filterInfo.Name);
-            cboCamera.SelectedIndex = 1;
+            try
+            {
+                cboCamera.SelectedIndex = 1;
+            }
+            catch
+            {
+                try
+                {
+                    cboCamera.SelectedIndex = 0;
+                }
+                catch
+                {
+                    MessageBox.Show("Connect failed!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
             videoCaptureDevice = new VideoCaptureDevice();
         }
         
